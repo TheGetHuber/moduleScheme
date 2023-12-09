@@ -9,6 +9,6 @@ require "json"
 require "open3"
 require "colorize"
 
-dayManager = Core.new()
+moduleScheme = Core.new()
 
-dayManager.mainLoop()
+moduleScheme.mainLoop()
