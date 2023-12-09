@@ -20,3 +20,7 @@ You can just download the repository, it itself is a last version.
 # What OS'es are supported?
 
 Only Linux and Andorid's Termux. You can port this mess if u really like it.
+
+# Addictional warnings
+
+THE CODE IS A MESS, WARNED.
