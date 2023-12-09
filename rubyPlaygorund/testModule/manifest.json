@@ -1,0 +1,16 @@
+{
+    "className": "TestModule",
+    "scriptFile": "script.rb",
+    "scriptDir": "./",
+    "functions": [
+        {"name": "test" ,"args": []      },
+        {"name": "penis","args": ["text"]}
+    ],
+
+    "info":{
+        "name": "Test function",
+        "desc": "Made to test new system of modules",
+        "author": "me",
+        "version": "0.0.1"
+    }
+}

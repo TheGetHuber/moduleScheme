@@ -1,0 +1,21 @@
+{
+    "className": "TermuxAPI",
+    "scriptFile": "main.rb",
+    "functions": [{
+            "name": "api",
+            "args": ["state"]
+        },
+        {
+            "name": "notification",
+            "args": ["title", "content", "id", "alertOnce", "button1", "button1Act", "button2", "button2Act", "button3", "button3Act"]
+        }
+    ],
+    "mainLoopFunctions": [],
+
+    "info": {
+        "name": "TermuxAPI",
+        "desc": "Allows to use Termux commands. Android usage only",
+        "author": "me",
+        "version": "a0315b"
+    }
+}
