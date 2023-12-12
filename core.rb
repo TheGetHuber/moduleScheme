@@ -82,7 +82,7 @@ class Core
                 file = File.new(moduleDirPath + "/" + manifest)
                 raw = JSON.parse(file.read)
         
-                require moduleDirPath + "/" + raw["scriptFile"]
+                require moduleDirPath + "/" + raw["mainScriptFile"]
                 
                 @miscModules.push(eval(raw["className"] + ".new(\"" + moduleDirPath + "\")"))
 
@@ -96,6 +96,12 @@ class Core
             @user.ping
 
             @miscModules.each do |miscModule|
+               dependencies = @miscModule.getVar("parsedManifest")["dependencies"]
+               puts "SHIT"
+               puts dependencies 
+            end
+
+            @miscModules.each do |miscModule|
                 begin
                     miscModule.ping
                 rescue => exception
@@ -103,7 +109,7 @@ class Core
                 end
             end
         rescue => exception
-            outputError(self, "Module isn't ponged! Check failed", exception)
+            outputError(self, "Some module isn't ponged! Check failed", exception)
         end
     end
 

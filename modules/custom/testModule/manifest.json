@@ -1,18 +1,12 @@
 {
     "className": "TestModule",
-    "scriptFile": "script.rb",
-    "functions": [{
-            "name": "test",
-            "args": []
-        },
-        {
-            "name": "penis",
-            "args": ["text"]
-        }
-    ],
+    "mainScriptFile": "script.rb",
+    "scriptFiles": ["add0.rb", "eggs.rb", "hello.rb"],
     "mainLoopFunctions": [
 
     ],
+
+    "dependencies": [],
 
     "info": {
         "name": "Test function",

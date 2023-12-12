@@ -1,0 +1,18 @@
+{
+    "className": "Toolbar",
+    "mainScriptFile": "mainScript.rb",
+    "scriptFiles": [],
+    "mainLoopFunctions": [{
+        "name": "mainLoop",
+        "args": []
+    }],
+
+    "dependencies": ["TermuxAPI"],
+
+    "info": {
+        "name": "Test function",
+        "desc": "Made to test new system of modules",
+        "author": "me",
+        "version": "0.0.1"
+    }
+}

@@ -1,14 +1,15 @@
 {
     "className": "Console",
-    "scriptFile": "console.rb",
-    "functions": [
-        {"name": "getUserInput", "args": []}
-    ],
-    "mainLoopFunctions": [
-        {"name": "getUserInput", "args": []}
-    ],
+    "mainScriptFile": "console.rb",
+    "scriptFiles": [],
+    "mainLoopFunctions": [{
+        "name": "getUserInput",
+        "args": []
+    }],
 
-    "info":{
+    "dependencies": [],
+
+    "info": {
         "name": "Console",
         "desc": "Provides console-like user control",
         "author": "me",

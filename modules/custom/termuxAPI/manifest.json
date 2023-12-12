@@ -1,16 +1,10 @@
 {
     "className": "TermuxAPI",
-    "scriptFile": "main.rb",
-    "functions": [{
-            "name": "api",
-            "args": ["state"]
-        },
-        {
-            "name": "notification",
-            "args": ["title", "content", "id", "alertOnce", "button1", "button1Act", "button2", "button2Act", "button3", "button3Act"]
-        }
-    ],
+    "mainScriptFile": "main.rb",
+    "scriptFiles": [],
     "mainLoopFunctions": [],
+
+    "dependencies": [],
 
     "info": {
         "name": "TermuxAPI",

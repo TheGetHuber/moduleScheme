@@ -2,6 +2,7 @@ class TestModule < BaseModule
     def initialize(*args)
         super
         
+        
     end
 
     def test()
