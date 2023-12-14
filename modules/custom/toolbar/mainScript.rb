@@ -12,6 +12,6 @@ class Toolbar < BaseModule
         isInitialized = true
       end
         puts @core
-        @termux.notification("test", "notification", true, "Text", "ls")
+        @termux.notification("test", "notification", 128, true, "Text", "ls")
     end
 end
