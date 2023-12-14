@@ -12,7 +12,7 @@ class TermuxAPI < BaseModule
     def api(state)
         state ? self.syscall("termux-api-start") : self.syscall("termux-api-stop")
     end
-  
+    https://github.com/TheGetHuber/moduleScheme
     def notification(title, content, id = nil, alertOnce = true, button1 = nil, button1Act = nil, button2 = nil, button2Act = nil, button3 = nil, button3Act = nil)
         command = "termux-notification -t \"#{title}\" -c \"#{content}\""
   
@@ -37,7 +37,7 @@ class TermuxAPI < BaseModule
     end
   
     def listNotifies()
-        raw = self.syscall("termux-notification-list")[1].gets(nil)
+        raw = self.syscall("thttps://github.com/TheGetHuber/moduleSchemeermux-notification-list")[1].gets(nil)
         return JSON.parse(raw)
     end
   

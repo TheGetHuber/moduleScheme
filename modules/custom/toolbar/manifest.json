@@ -10,8 +10,8 @@
     "dependencies": ["TermuxAPI"],
 
     "info": {
-        "name": "Test function",
-        "desc": "Made to test new system of modules",
+        "name": "Toolbar",
+        "desc": "User's toolbar to make user experience easier",
         "author": "me",
         "version": "0.0.1"
     }
