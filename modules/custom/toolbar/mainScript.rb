@@ -2,11 +2,16 @@ class Toolbar < BaseModule
     def initialize(*args)
         super
 
-        @userInput
-        @termux = @core.getModule("TermuxAPI")
+        @isInitialized = false
+        @termux = nil
     end
 
     def mainLoop()
+      if(!@isInitialized)
+        @termux = @core.getModule("TermuxAPI")
+        isInitialized = true
+      end
+        puts @core
         @termux.notification("test", "notification")
     end
 end

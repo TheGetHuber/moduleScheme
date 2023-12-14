@@ -2,7 +2,7 @@ class TestModule < BaseModule
     def initialize(*args)
         super
         
-        
+       puts @core 
     end
 
     def test()

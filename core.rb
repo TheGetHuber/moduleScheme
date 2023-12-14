@@ -96,7 +96,7 @@ class Core
             @user.ping
 
             @miscModules.each do |miscModule|
-               dependencies = @miscModule.getVar("parsedManifest")["dependencies"]
+               dependencies = miscModule.getVar("parsedManifest")
                puts "SHIT"
                puts dependencies 
             end

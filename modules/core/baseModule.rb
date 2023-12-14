@@ -3,6 +3,8 @@ class BaseModule
         @moduleDir = moduleDir
         @manifest = nil
         @parsedManifest = nil
+        @core = nil
+
         if(File.directory?(moduleDir))
             @manifest = File.open(@moduleDir + "/manifest.json")
         end
