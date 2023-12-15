@@ -13,19 +13,16 @@ class Core
         @user = User.new(__dir__+"/core/user.rb")
         @user.initCore(self)
 
-        self.checkModules
-
         if(@miscModules != [])
-            for i in @miscModules do
-                i.initCore(self)
+            @miscModules.each do
+                |miscModule|
+
+                self.say(self, "Initializing " + miscModule.class.to_s + "...")
+                miscModule.initModule(self)
             end
         end
 
-        @miscModules.each do
-            |miscModule|
-
-            self.say self, miscModule.class
-        end
+        self.checkModules
 
         self.say self, "Ready!"
 
@@ -94,12 +91,6 @@ class Core
         begin
             @efm.ping
             @user.ping
-
-            @miscModules.each do |miscModule|
-               dependencies = miscModule.getVar("parsedManifest")
-               puts "SHIT"
-               puts dependencies 
-            end
 
             @miscModules.each do |miscModule|
                 begin

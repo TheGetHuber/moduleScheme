@@ -12,7 +12,6 @@ class TermuxAPI < BaseModule
     def api(state)
         state ? self.syscall("termux-api-start") : self.syscall("termux-api-stop")
     end
-    https://github.com/TheGetHuber/moduleScheme
     def notification(title, content, id = nil, alertOnce = true, button1 = nil, button1Act = nil, button2 = nil, button2Act = nil, button3 = nil, button3Act = nil)
         command = "termux-notification -t \"#{title}\" -c \"#{content}\""
   
@@ -30,6 +29,21 @@ class TermuxAPI < BaseModule
   
     def pinnedNotify(title, content, id)
        self.syscall("termux-notification --ongoing -t #{title} -c #{content} --id #{id}")
+    end
+
+    def progressNotify(title, content, value, id = nil)
+        if(value > 100)
+            @core.say(self, "Value for the progress bar notification is more than 100. Setted by 100.")
+            value = 100
+        end
+        value = floor(value)
+        value0 = value/2
+        value1 = value/2-49
+        progress0 = "="*value0
+        progress1 = "="*value1
+        progressbar = "[" + progress0 + "[" + value.to_s + "]" + progress1 + "]"
+
+        self.notification(title, content + "\n" + progressbar, id)
     end
   
     def deleteNotify(id)

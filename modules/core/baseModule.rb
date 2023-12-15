@@ -5,15 +5,19 @@ class BaseModule
         @parsedManifest = nil
         @core = nil
 
-        if(File.directory?(moduleDir))
-            @manifest = File.open(@moduleDir + "/manifest.json")
-        end
+        
 
     end
 
-    def initModule()
+    def initModule(core)
 
-        @core.say self, "Initializing " + self.class.to_s + "..."
+        if(File.directory?(@moduleDir))
+            @manifest = File.open(@moduleDir + "/manifest.json")
+
+            @parsedManifest = JSON.parse(@manifest.read)
+        end
+        
+        self.initCore(core)
     end
 
     def getVar(variable)
@@ -49,7 +53,6 @@ class BaseModule
         @core = core
 
         if(@manifest != nil)
-            @parsedManifest = JSON.parse(@manifest.read)
             @parsedManifest["mainLoopFunctions"].each{ 
                 |func|
 
