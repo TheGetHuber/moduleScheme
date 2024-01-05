@@ -1,0 +1,3 @@
+@core.say self, "Entering core..."
+@prefix = "Core."
+@inCore = true

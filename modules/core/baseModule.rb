@@ -6,7 +6,6 @@ class BaseModule
         @core = nil
 
         
-
     end
 
     def initModule(core)

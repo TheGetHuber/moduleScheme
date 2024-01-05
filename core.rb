@@ -6,12 +6,18 @@ class Core
 
         self.say self, "Initializing Core..."
 
+        if(!RUBY_PLATFORM.include?("linux"))
+            self.outputWarning(self, "OS validation warn", "Your OS doesn't seems to be linux. The program may not work as expected.")
+        end
+
         self.loadModules
 
         @efm = EFM.new(__dir__+"/core/efm.rb")
-        @efm.initCore(self)
+        self.say(self, "Initializing EFM...")
+        @efm.initModule(self)
         @user = User.new(__dir__+"/core/user.rb")
-        @user.initCore(self)
+        self.say(self, "Initializing User...")
+        @user.initModule(self)
 
         if(@miscModules != [])
             @miscModules.each do
@@ -23,6 +29,11 @@ class Core
         end
 
         self.checkModules
+
+        if(!@efm.findStorage("system0"))
+            self.say(self, "Creating system storage...")
+            @efm.createStorage("system0")
+        end
 
         self.say self, "Ready!"
 

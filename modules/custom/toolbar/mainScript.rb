@@ -11,7 +11,6 @@ class Toolbar < BaseModule
         @termux = @core.getModule("TermuxAPI")
         isInitialized = true
       end
-        puts @core
         @termux.notification("test", "notification", 128, true, "Text", "ls")
     end
 end

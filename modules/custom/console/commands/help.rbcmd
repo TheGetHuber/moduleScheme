@@ -1,0 +1,4 @@
+@commands.each do
+    |command|
+    puts command
+end

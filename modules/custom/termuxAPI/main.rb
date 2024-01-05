@@ -36,7 +36,7 @@ class TermuxAPI < BaseModule
             @core.say(self, "Value for the progress bar notification is more than 100. Setted by 100.")
             value = 100
         end
-        value = floor(value)
+        value = value.floor
         value0 = value/2
         value1 = value/2-49
         progress0 = "="*value0
@@ -51,7 +51,7 @@ class TermuxAPI < BaseModule
     end
   
     def listNotifies()
-        raw = self.syscall("thttps://github.com/TheGetHuber/moduleSchemeermux-notification-list")[1].gets(nil)
+        raw = self.syscall("termux-notification-list")[1].gets(nil)
         return JSON.parse(raw)
     end
   
@@ -98,16 +98,17 @@ class TermuxAPI < BaseModule
             battery = JSON.parse(self.syscall("termux-battery-status")[1].gets(nil))
             return battery[type]
         rescue NoMethodError
-            puts "ERROR: Wrong type was given"
+            @core.outputError(self, "Nil battery status type", "Requested type of the battery status is nil")
             return 0
         end
     end
   
     def dialog(type)
         types = ["confirm", "checkbox", "counter", "date", "radio", "spinner", "speech", "text", "time"]
-        if(types.include?(type) == false)
+        if(!types.include?(type))
+            @core.outputError(self, "Unknown type of dialog", "Requested type of the dialog is unknown.")
             puts "ERROR: Wrong dialog's type was given"
-            return 1
+            return -1
         end
         command = "termux-dialog #{type}"
         return JSON.parse( self.syscall(command)[1].gets(nil) )

@@ -1,0 +1,9 @@
+puts "EFM - Extended File Manager, made to storage modules settings and user information | Version: 0.0.2v ;Author: me"
+puts "User - module for user control | Version: 0.0.1v ;Author: me"
+
+@core.getModule("**").each do 
+    |miscModule|
+    info = miscModule.getVar("parsedManifest")["info"]
+
+    puts info["name"] + " - " + info["desc"] + " | Version: " + info["version"] + " ;Author: " + info["author"]
+end

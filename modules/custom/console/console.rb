@@ -4,9 +4,13 @@ class Console < BaseModule
 
         @userInput = ""
         @lastUserInput = @userInput
-        @commands = ["clear", "echo", "help", "exit", "test", "listModules", "enterCore"]
+        @commands = []
 
-        @prefix = "$"
+        Dir.each_child("./modules/custom/console/commands/") do |file|
+            @commands.push(File.basename(file, ".rbcmd"))
+        end
+
+        @prefix = "$ "
         @inCore = false
     end
 
@@ -21,7 +25,7 @@ class Console < BaseModule
     def checkComand()
         if(@inCore)
             if(@userInput.strip == "exit")
-                self.exit()
+                self.runCommand("exit")
                 return
             end
             @core.runCommand(@userInput)
@@ -47,62 +51,22 @@ class Console < BaseModule
             end
         end
 
-        if(@commands.include?(command.to_s.strip))
-            eval("self."+command.to_s)
-        else
-            puts "unknown command: " + command.to_s.strip
+        runCommand(command)
+    end
+
+    def runCommand(command)
+        begin
+            eval(File.open("modules/custom/console/commands/" + command.to_s + ".rbcmd").read())
+        rescue
+            @core.say self, "unknown command: " + command.to_s
         end
     end
 
     def getUserInput()
         @lastUserInput = @userInput
 
-        print @prefix + " "
+        print @prefix
         @userInput = gets.chomp
         checkComand()
-    end
-
-    def clear()
-        system("clear")
-    end
-
-    def help()
-        @commands.each do
-            |command|
-            puts command
-        end
-    end
-
-    def echo(text)
-        puts text
-    end
-
-    def test()
-        @core.getModule("TestModule").runMethod("test")
-    end
-
-    def listModules()
-        @core.getModule("**").each do 
-            |miscModule|
-            info = miscModule.getVar("parsedManifest")["info"]
-
-            puts info["name"] + " - " + info["desc"] + " | Version: " + info["version"] + " ;Author: " + info["author"]
-        end
-    end
-
-    def enterCore()
-        @core.say self, "Entering core..."
-        @prefix = "Core."
-        @inCore = true
-    end
-
-    def exit()
-        if(@inCore)
-            @inCore = false
-            @prefix = "$ "
-            @core.say self, "Exiting core..."
-            return 0
-        end
-        @core.shutdown(self)
     end
 end

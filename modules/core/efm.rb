@@ -2,20 +2,38 @@ class EFM < BaseModule
     def initialize(*args)
         super
 
-        @sysFiles = []
-    end
+        require "./modules/core/storage.rb"
+        require "./modules/core/vfile.rb"
 
-    def findFile(fileName)
-        command = []
-        command[0, 1, 2, 3] = Open3.popen3("ls")
-    end
-
-    def createFile(fileName, content={})
+        @storages = []
 
     end
 
-    def readFIle(fileName)
-        file = FIle.new(self.findFIle(fileName), "r")
-        JSON.parse(file.read)
+    def scanStorages()
+        @storages = []
+
+        Dir.each_child("./storage") do |storage|
+            @storages.push(Storage.new(storage))
+        end
     end
+
+    def findStorage(storageName)
+        @storages.each do |storage|
+            if(storage.getName == storageName)
+                return true
+            end
+        end
+        return false
+    end
+
+    def createStorage(storageName)
+        if(!self.findStorage(storageName))
+            @storages.push(Storage.new(storageName))
+            return 1
+        end
+        return -1
+    end
+
+    
+
 end 

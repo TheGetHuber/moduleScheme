@@ -1,0 +1,7 @@
+if(@inCore)
+    @core.say self, "Exiting core..."
+    @inCore = false
+    @prefix = "$ "
+    return
+end
+@core.shutdown self
