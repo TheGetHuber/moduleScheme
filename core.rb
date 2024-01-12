@@ -12,11 +12,11 @@ class Core
 
         self.loadModules
 
-        @efm = EFM.new(__dir__+"/core/efm.rb")
         self.say(self, "Initializing EFM...")
+        @efm = EFM.new(__dir__+"/core/efm.rb")
         @efm.initModule(self)
-        @user = User.new(__dir__+"/core/user.rb")
         self.say(self, "Initializing User...")
+        @user = User.new(__dir__+"/core/user.rb")
         @user.initModule(self)
 
         if(@miscModules != [])

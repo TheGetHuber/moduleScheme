@@ -1,0 +1,10 @@
+if(@efmStatus[:enabled])
+    changePrefix("$ ")
+    @core.say(self, "Exiting from EFM...")
+    @efmStatus[:enabled] = false
+    return
+end
+
+@core.say(self, "Entering in EFM...")
+@efmStatus[:enabled] = true
+changePrefix("[]: ")

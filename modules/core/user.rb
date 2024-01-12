@@ -3,20 +3,30 @@ class User < BaseModule
         super
 
         @name = ""
-        @metadata = {}
+
+        @initialized = false
+        self.initUser("test")
+
+        # TODO: core modules cant interract with core, needs to he fixed
     end
 
-    def setup(name, metadata)
-        @name = name
-        @metadata = metadata
+    def initUser(user)
+        @efm = @core.getModule("efm")
+
+        @efm.findFile("system0", "", "")
+
+        @initialized = true
     end
 
-    def saveData(fileName)
-        saveFileContent = {}
-        saveFileName = "user" + @name + "saveFile.json"
+    def getData(moduleName, dataName)
+        return
     end
 
-    def loadData(fileName)
-        
+    def writeData(moduleName, dataName, dataValue)
+        return
+    end
+
+    def getAllData(moduleName)
+        return
     end
 end

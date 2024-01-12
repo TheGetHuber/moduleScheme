@@ -5,6 +5,12 @@ class Console < BaseModule
         @userInput = ""
         @lastUserInput = @userInput
         @commands = []
+        @efmStatus = {
+            enabled: false,
+            commands: ["scanStorages", "getStorages", "findStorage", "createStorage", "deleteStorage"],
+            currentPath: [],
+            currentStorage: []
+        }
 
         Dir.each_child("./modules/custom/console/commands/") do |file|
             @commands.push(File.basename(file, ".rbcmd"))
@@ -29,6 +35,50 @@ class Console < BaseModule
                 return
             end
             @core.runCommand(@userInput)
+            return
+        end
+
+        if(@efmStatus[:enabled])
+            command = ""
+            args = []
+            arg = ""
+
+            isCommand = true
+
+            if(@userInput == "efm")
+                runCommand("efm")
+                return
+            end
+
+            (0..@userInput.length - 1).each do |i|
+                if(@userInput[i] == " " || @userInput[i] == nil)
+                    if(isCommand)
+                        isCommand = false
+                    else
+                        args.push(arg)
+                        arg = ""
+                    end
+                    next
+                end
+                if(isCommand)
+                    command += @userInput[i]
+                    next
+                end
+                arg += @userInput[i]
+            end
+
+            @core.say(self, command + ";" + args.to_s)
+
+            if(@efmStatus[:commands].include?(command))
+                efm = @core.getModule("efm")
+                begin
+                    @core.say(self, efm.runMethod(command, args))
+                rescue => exception
+                    @core.outputWarning(self, "Command error", exception.to_s)
+                end
+            else
+                @core.say(self, "Uknown EFM command: ;" + command + ";")
+            end
             return
         end
 
